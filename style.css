@@ -66,16 +66,63 @@ main { padding: 0 clamp(16px, 5vw, 64px); }
 .filters button.active, .filters button:hover { color: var(--bg); background: var(--fg); border-color: var(--fg); }
 
 .grid { columns: 3 300px; column-gap: 12px; }
-.grid img {
-  width: 100%;
+.card {
+  position: relative;
   margin-bottom: 12px;
-  display: block;
   break-inside: avoid;
   cursor: zoom-in;
-  border-radius: 4px;
-  transition: opacity .3s, transform .3s;
+  border-radius: 6px;
+  overflow: hidden;
 }
-.grid img:hover { opacity: .85; transform: scale(1.01); }
+.card img {
+  width: 100%;
+  display: block;
+  transition: transform .4s;
+}
+.card:hover img { transform: scale(1.03); }
+.card figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 40px 14px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,.85), transparent);
+  font-weight: 500;
+  font-size: .95rem;
+}
+.card.no-img {
+  aspect-ratio: 9 / 14;
+  background: linear-gradient(135deg, #2a1f1a, #14100e);
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+}
+.card.no-img figcaption {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: none;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.card.no-img figcaption::after {
+  content: "Watch on Instagram ↗";
+  font-size: .8rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.views {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,.7);
+  backdrop-filter: blur(6px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+}
 
 /* Brands */
 .brands { margin: 120px auto 0; max-width: 960px; text-align: center; }
@@ -147,11 +194,24 @@ footer { text-align: center; color: var(--muted); padding: 40px 16px; font-size:
 .lb-close { top: 8px; right: 16px; }
 .lb-prev { left: 8px; }
 .lb-next { right: 8px; }
-.lb-caption { position: absolute; bottom: 24px; color: var(--muted); }
+.lightbox img { max-height: 78vh; }
+.lb-caption {
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+}
+.lb-caption .btn { margin: 0; padding: 8px 20px; font-size: .9rem; }
+.lb-caption .btn[hidden] { display: none; }
+.hero { background-position: center 25%; }
 
 @media (max-width: 600px) {
   .links a { margin-left: 14px; font-size: .9rem; }
   .grid { columns: 2; column-gap: 8px; }
-  .grid img { margin-bottom: 8px; }
+  .card { margin-bottom: 8px; }
+  .card figcaption { font-size: .8rem; padding: 32px 10px 8px; }
+  .lb-caption { flex-direction: column; gap: 8px; }
   .lb-prev, .lb-next { display: none; } /* swipe instead */
 }

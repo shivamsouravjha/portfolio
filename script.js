@@ -34,23 +34,48 @@ brandGroups.forEach(([group, list]) => {
 if (!brandGroups.length) $("brands").remove();
 
 // Hero background = first photo
-if (CONFIG.photos.length) {
-  document.querySelector(".hero").style.backgroundImage = `url("${CONFIG.photos[0].src}")`;
+const heroImg = CONFIG.hero || (CONFIG.photos[0] && CONFIG.photos[0].src);
+if (heroImg) {
+  document.querySelector(".hero").style.backgroundImage = `url("${heroImg}")`;
 }
 
 // Gallery + filters
 let visible = CONFIG.photos;
+let slides = []; // visible items that have an image, for the lightbox
 const grid = $("grid");
 
 function renderGrid() {
   grid.innerHTML = "";
-  visible.forEach((p, i) => {
-    const img = document.createElement("img");
-    img.src = p.src;
-    img.alt = p.caption || "";
-    img.loading = "lazy";
-    img.addEventListener("click", () => openLightbox(i));
-    grid.appendChild(img);
+  slides = visible.filter((p) => p.src);
+  visible.forEach((p) => {
+    const card = document.createElement("figure");
+    card.className = "card";
+
+    if (p.src) {
+      const img = document.createElement("img");
+      img.src = p.src;
+      img.alt = p.caption || "";
+      img.loading = "lazy";
+      card.appendChild(img);
+      card.addEventListener("click", () => openLightbox(slides.indexOf(p)));
+    } else {
+      // No screenshot yet: show a text tile that opens the reel directly
+      card.classList.add("no-img");
+      card.addEventListener("click", () => window.open(p.link, "_blank", "noopener"));
+    }
+
+    if (p.views) {
+      const badge = document.createElement("span");
+      badge.className = "views";
+      badge.textContent = `▶ ${p.views} views`;
+      card.appendChild(badge);
+    }
+    if (p.caption) {
+      const cap = document.createElement("figcaption");
+      cap.textContent = p.caption;
+      card.appendChild(cap);
+    }
+    grid.appendChild(card);
   });
 }
 
@@ -76,9 +101,12 @@ const lb = $("lightbox");
 let current = 0;
 
 function show(i) {
-  current = (i + visible.length) % visible.length;
-  $("lb-img").src = visible[current].src;
-  $("lb-caption").textContent = visible[current].caption || "";
+  current = (i + slides.length) % slides.length;
+  $("lb-img").src = slides[current].src;
+  $("lb-caption").textContent = slides[current].caption || "";
+  const link = $("lb-link");
+  link.hidden = !slides[current].link;
+  if (slides[current].link) link.href = slides[current].link;
 }
 function openLightbox(i) {
   show(i);
