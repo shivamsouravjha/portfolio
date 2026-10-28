@@ -19,7 +19,6 @@ const CONFIG = {
       "Winn Foods",
       "Awe Foods",
       "Nearwala",
-      "My PB",
     ],
     "Coffee & Drinks": [
       "Blue Tokai",
@@ -30,7 +29,8 @@ const CONFIG = {
       "DRNK Salts",
       "Supply6",
     ],
-    "Health & Wellness": ["Liveology", "Polka Wellness", "Protyze"],
+    "Protein & Nutrition": ["Protyze", "My PB"],
+    Wellness: ["Liveology", "Polka Wellness"],
     Restaurants: [
       "11:11",
       "Khao Aur Khane Do",
