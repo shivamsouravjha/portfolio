@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Photography portfolio of Your Name">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <nav>
+      <span class="logo" id="site-name"></span>
+      <div class="links">
+        <a href="#work">Work</a>
+        <a href="#brands">Brands</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+    <div class="hero-text">
+      <h1 id="hero-name"></h1>
+      <p id="tagline"></p>
+    </div>
+  </header>
+
+  <main>
+    <section id="work">
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="brands" class="brands">
+      <h2>Brands I've worked with</h2>
+      <p class="brand-count" id="brand-count"></p>
+      <div class="brand-groups" id="brand-groups"></div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p id="about-text"></p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Let's work together</h2>
+      <p class="contact-sub">Open to collaborations with food, beverage and lifestyle brands.</p>
+      <a class="btn" id="email-link"></a>
+      <a class="btn ghost" id="ig-link" target="_blank" rel="noopener"></a>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> <span id="footer-name"></span></footer>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" aria-label="Close">&times;</button>
+    <button class="lb-prev" aria-label="Previous">&#8249;</button>
+    <img id="lb-img" alt="">
+    <button class="lb-next" aria-label="Next">&#8250;</button>
+    <p class="lb-caption" id="lb-caption"></p>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
